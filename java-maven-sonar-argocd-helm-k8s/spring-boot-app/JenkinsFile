@@ -38,7 +38,9 @@ pipeline {
       steps {
         script {
             sh '''
-            unset DOCKER_API_VERSION
+            curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.3.1.tgz -o docker.tgz
+            tar xzvf docker.tgz
+            export PATH=$PWD/docker:$PATH
             cd java-maven-sonar-argocd-helm-k8s/spring-boot-app 
             docker build -t ${DOCKER_IMAGE} .
             '''
